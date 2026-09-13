@@ -43,8 +43,8 @@ public class LoginController {
 
     // Login API
     @PostMapping("/login")
-    public ResponseEntity<?> login(HttpServletRequest req, @RequestBody LoginRequest logindto) {
-        LoginResponce login = loginService.login(logindto);
+    public ResponseEntity<?> login(HttpServletRequest req, @RequestBody LoginRequest loginDto) {
+        LoginResponce login = loginService.login(loginDto);
         if(login.isLoginFlag()){
             return ResponseEntity.ok(login);
         }
