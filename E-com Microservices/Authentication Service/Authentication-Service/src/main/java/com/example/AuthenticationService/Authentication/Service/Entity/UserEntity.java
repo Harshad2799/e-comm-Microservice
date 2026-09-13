@@ -54,4 +54,103 @@ public class UserEntity {
 
     @Column(name = "LAST_LOGIN_DATE")
     private Date lastLogin;
+
+    
+	public Long getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(Long userId) {
+		UserId = userId;
+	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public String getlName() {
+		return lName;
+	}
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+	public Double getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Double deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Double getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Double otp) {
+		this.otp = otp;
+	}
+
+	public String getAuthenticated() {
+		return authenticated;
+	}
+
+	public void setAuthenticated(String authenticated) {
+		this.authenticated = authenticated;
+	}
+
+	public String getIpAddress() {
+		return ipAddress;
+	}
+
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+    
+    
 }

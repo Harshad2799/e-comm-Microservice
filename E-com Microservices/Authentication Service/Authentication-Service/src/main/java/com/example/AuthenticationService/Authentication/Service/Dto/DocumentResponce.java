@@ -9,4 +9,26 @@ public class DocumentResponce {
     private long empId;
     private Base64 fileBytes;
     private String fileName;
+    
+    
+	public long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(long empId) {
+		this.empId = empId;
+	}
+	public Base64 getFileBytes() {
+		return fileBytes;
+	}
+	public void setFileBytes(Base64 fileBytes) {
+		this.fileBytes = fileBytes;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+    
+    
 }
