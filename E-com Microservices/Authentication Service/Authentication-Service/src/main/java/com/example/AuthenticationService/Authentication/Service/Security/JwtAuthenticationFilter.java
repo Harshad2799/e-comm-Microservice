@@ -1,5 +1,6 @@
 package com.example.AuthenticationService.Authentication.Service.Security;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,14 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 2. Validate token and set authentication context
             if (jwtUtils.validateToken(jwt)) {
                 String username = jwtUtils.extractUsername(jwt);
-                List<String> roles = jwtUtils.extractRoles(jwt); // e.g., ["ROLE_ADMIN"]
+                String roles = jwtUtils.extractRoles(jwt); // e.g., ["ROLE_ADMIN"]
 
-                List<SimpleGrantedAuthority> authorities = roles.stream()
-                        .map(SimpleGrantedAuthority::new)
-                        .toList();
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+ roles);
 
                 UsernamePasswordAuthenticationToken authToken = 
-                        new UsernamePasswordAuthenticationToken(username, null, authorities);
+                        new UsernamePasswordAuthenticationToken(username, null, List.of(authority));
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 

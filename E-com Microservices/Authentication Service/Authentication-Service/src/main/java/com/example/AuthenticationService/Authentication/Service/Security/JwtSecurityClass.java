@@ -25,11 +25,11 @@ public class JwtSecurityClass {
                 .csrf(csrf -> csrf.disable()) //disable csfr
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/auth/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/auth/customer/**").hasRole("CUSTOMER")
-                        .requestMatchers("api/auth/delivery/**").hasRole("DELIVERY_AGENT")
+                        .requestMatchers("/api/auth/delivery/**").hasRole("DELIVERY_AGENT")
                         .requestMatchers("/api/orders/**").hasAnyRole("CUSTOMER", "DELIVERY_AGENT", "ADMIN")
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated())
                 		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

@@ -5,61 +5,57 @@ import java.util.List;
 
 import javax.crypto.SecretKey;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 
+@Slf4j
 @Component
 public class JwtUtils {
+    private final Algorithm algorithm;
 
-    private final SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode("mySuperSecretSecureKeyForEcomMicroserviceApplication2026!"));
+
+    public JwtUtils( @Value("${jwt.secret}") String secret) {
+        this.algorithm = Algorithm.HMAC256(secret);
+    }
 
     public String generateToken(String login, String role){
-        return Jwts.builder()
-                .setSubject(login)
-                .claim("rolw", List.of("ROLE_"+ role))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 500000))
-                .signWith(key)
-                .compact();
+        return JWT.create()
+                .withSubject(login)
+                .withClaim("userId", login)
+                .withClaim("roles", role)
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
+                .sign(algorithm);
     }
 
-    public String validateAndExtractUserName(String token){
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
-    }
     
     public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
+
+        DecodedJWT jwt = JWT.decode(token);
+
+        return jwt.getSubject();
     }
     
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(key)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-    }
-    
-    @SuppressWarnings("unchecked")
-    public List<String> extractRoles(String token) {
-        return extractAllClaims(token).get("roles", List.class);
+
+    public String extractRoles(String token) {
+        DecodedJWT jwt = JWT.decode(token);
+        return jwt.getClaim("roles")
+                .asString();
     }
     
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
+            JWT.require(algorithm)
+                    .build()
+                    .verify(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            // Token is expired, malformed, or signature is invalid
+        } catch (IllegalArgumentException e) {
+            log.info("Invalidate token");
             return false;
         }
     }

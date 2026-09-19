@@ -4,6 +4,7 @@ import com.example.AuthenticationService.Authentication.Service.Dto.LoginRequest
 import com.example.AuthenticationService.Authentication.Service.Dto.LoginResponce;
 import com.example.AuthenticationService.Authentication.Service.Dto.RegisterResponse;
 import com.example.AuthenticationService.Authentication.Service.Entity.UserEntity;
+import com.example.AuthenticationService.Authentication.Service.Interface.IloginService;
 import com.example.AuthenticationService.Authentication.Service.Repository.UserRepository;
 import com.example.AuthenticationService.Authentication.Service.Security.JwtUtils;
 import com.example.AuthenticationService.Authentication.Service.Validate.ValidationClass;
@@ -67,7 +68,7 @@ public class LoginServiceImpl implements IloginService {
                     request.getUserName().equals(emp.getUserName()))) {
                 emp.setLastLogin(new Date());
                 loginRepository.save(emp);
-                login.setToken(jwtUtil.generateToken(request.getUserName()));
+                login.setToken(jwtUtil.generateToken(request.getUserName(), request.getRole()));
                 login.setUsername(request.getUserName());
                 login.setLoginFlag(true);
                 return login;

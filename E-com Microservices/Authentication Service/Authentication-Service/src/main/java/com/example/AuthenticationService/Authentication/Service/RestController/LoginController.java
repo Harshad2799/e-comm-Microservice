@@ -5,7 +5,7 @@ import com.example.AuthenticationService.Authentication.Service.Dto.LoginResponc
 import com.example.AuthenticationService.Authentication.Service.Dto.RegisterResponse;
 import com.example.AuthenticationService.Authentication.Service.Entity.UserEntity;
 import com.example.AuthenticationService.Authentication.Service.Repository.UserRepository;
-import com.example.AuthenticationService.Authentication.Service.Service.IloginService;
+import com.example.AuthenticationService.Authentication.Service.Interface.IloginService;
 import com.example.AuthenticationService.Authentication.Service.Security.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

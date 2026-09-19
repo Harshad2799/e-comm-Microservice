@@ -14,6 +14,7 @@ public class LoginRequest {
     private String status;
     private String token;
     private String email;
+	private String role;
     
     
 	public String getUserName() {

@@ -1,4 +1,4 @@
-package com.example.AuthenticationService.Authentication.Service.Service;
+package com.example.AuthenticationService.Authentication.Service.Interface;
 
 import com.example.AuthenticationService.Authentication.Service.Dto.LoginRequest;
 import com.example.AuthenticationService.Authentication.Service.Dto.LoginResponce;
