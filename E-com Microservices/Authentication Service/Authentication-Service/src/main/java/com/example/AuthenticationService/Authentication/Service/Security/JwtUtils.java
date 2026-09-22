@@ -55,7 +55,7 @@ public class JwtUtils {
                     .verify(token);
             return true;
         } catch (IllegalArgumentException e) {
-            log.info("Invalidate token");
+ //           log.info("Invalidate token");
             return false;
         }
     }

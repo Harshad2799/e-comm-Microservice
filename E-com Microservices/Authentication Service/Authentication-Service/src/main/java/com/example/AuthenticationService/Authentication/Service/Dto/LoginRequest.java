@@ -6,7 +6,8 @@ import java.util.Date;
 
 @Data
 public class LoginRequest {
-    private String userName;
+   
+	private String userName;
     private String password;
     private Double otp;
     private String ipAddress;
@@ -65,6 +66,11 @@ public class LoginRequest {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    
+	public String getRole() {
+			return role;
+	}
+	public void setRole(String role) {
+			this.role = role;
+	}
     
 }

@@ -54,6 +54,9 @@ public class UserEntity {
 
     @Column(name = "LAST_LOGIN_DATE")
     private Date lastLogin;
+    
+    @Column(name = "ROLE_PERMISSION")
+    
 
     
 	public Long getUserId() {
