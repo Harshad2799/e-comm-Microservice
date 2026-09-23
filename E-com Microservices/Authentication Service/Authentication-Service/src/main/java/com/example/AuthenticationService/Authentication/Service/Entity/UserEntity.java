@@ -55,8 +55,8 @@ public class UserEntity {
     @Column(name = "LAST_LOGIN_DATE")
     private Date lastLogin;
     
-    @Column(name = "ROLE_PERMISSION")
-    
+    @Column(name = "ROLE")
+    private Role roleId;
 
     
 	public Long getUserId() {
@@ -154,6 +154,15 @@ public class UserEntity {
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-    
+
+	public Role getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Role roleId) {
+		this.roleId = roleId;
+	}
+
+
     
 }

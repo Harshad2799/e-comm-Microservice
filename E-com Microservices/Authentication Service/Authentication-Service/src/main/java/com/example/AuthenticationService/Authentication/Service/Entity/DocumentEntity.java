@@ -28,11 +28,9 @@ public class DocumentEntity {
     private String docType;
 
     @Column(name = "CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
     @Column(name = "UPDATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 
     @Column(name = "IP_ADDRESS")

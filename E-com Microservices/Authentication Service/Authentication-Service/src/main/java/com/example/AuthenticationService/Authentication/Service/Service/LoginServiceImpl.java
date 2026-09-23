@@ -58,6 +58,7 @@ public class LoginServiceImpl implements IloginService {
         try {
             ValidationClass.ValidateLoginFields(request, login);
             UserEntity emp = loginRepository.findByUserName(request.getUserName());
+            
             if(emp ==  null){
                 login.setLoginFlag(false);
                 login.setResMsg("User Not Found");

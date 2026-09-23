@@ -52,6 +52,10 @@ public class Permissions {
     
     @Column(name = "AUTH_TYPE", length = 1)
     private String type;
+    
+    
+    @Column(name="ROLE_ID")
+    private Role roleId;
 
 	public Long getId() {
 		return id;
